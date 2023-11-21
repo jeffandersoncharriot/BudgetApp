@@ -1,0 +1,113 @@
+﻿<Window x:Class="TheGregsWPF.BudgetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TheGregsWPF"
+        mc:Ignorable="d"
+        Icon="images/icon.png"
+        Title="Home Budget Planner" Height="550" Width="850">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New" Click="btnNewDatabase_Click"/>
+                <MenuItem Header="Open" Click="btnSelectDatabase_Click"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Name="txbDbPath" />
+            </StatusBarItem>
+        </StatusBar>
+        <DockPanel x:Name="budgetContainer">
+            <DockPanel DockPanel.Dock="Left" Width="280">
+                <TextBox  DockPanel.Dock="Bottom" Height="100" Margin="10 0 10 10" x:Name="txbLog" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Background="Beige" Padding="4"></TextBox>
+                <Border Padding="10" DockPanel.Dock="Top">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <Label>Start date:</Label>
+                            <DatePicker x:Name="datePickerStart" SelectedDateChanged="handleSummaryChanged"></DatePicker>
+
+                            <Label>End date:</Label>
+                            <DatePicker x:Name="datePickerEnd" SelectedDateChanged="handleSummaryChanged"></DatePicker>
+
+                            <GroupBox Margin="0,20,0,0" Header="Summarize By">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <CheckBox x:Name="summarizeByCategoryCheckbox"
+                                            Content="Category"
+                                            Checked="handleSummaryChanged"
+                                            Unchecked="handleSummaryChanged"/>
+                                    <CheckBox x:Name="summarizeByMonthCheckbox"
+                                            Content="Month"
+                                            Grid.Column="1"
+                                            Checked="handleSummaryChanged"
+                                            Unchecked="handleSummaryChanged"/>
+                                </Grid>
+                            </GroupBox>
+                            <Button Height="25" Margin="0,20" x:Name="btnDelete" Click="btnDelete_Click" IsEnabled="False">Delete</Button>
+                            <CheckBox x:Name="chckBoxFilter" Checked="handleSummaryChanged" Unchecked="handleSummaryChanged">Filter by Category</CheckBox>
+
+                            <ComboBox Margin="0 20" x:Name="cmbCategories" DisplayMemberPath="{Binding Description}" SelectionChanged="handleSummaryChanged"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Margin="0 0 4 0" Padding="0 6" x:Name="btnNewCategory" Click="btnNewCategory_Click" Grid.Column="0">New category</Button>
+                                <Button Margin="4 0 0 0" Padding="0 6" x:Name="btnNewExpense" Click="btnNewExpense_Click" Grid.Column="1">New Expense</Button>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+            </DockPanel>
+            <Grid x:Name="SearchBar" DockPanel.Dock="Top" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <DockPanel>
+                    <Label Padding="2">Search</Label>
+                    <TextBox Grid.Column="0" x:Name="txbSearch" TextChanged="txbSearch_TextChanged"></TextBox>
+                </DockPanel>
+                <Button Grid.Column="1" x:Name="btnPrevious" Click="btnPrevious_Click">Previous</Button>
+                <Button Grid.Column="2" x:Name="btnNext" Click="btnNext_Click">Next</Button>
+            </Grid>
+            <DataGrid DockPanel.Dock="Right" x:Name="dataGridBudgetItems"
+                IsReadOnly="True"
+                ClipboardCopyMode="None"
+                AutoGenerateColumns="False"
+                SelectionMode="Extended"
+                MouseDoubleClick="dataGridBudgetItems_MouseDoubleClick">
+                <!--https://stackoverflow.com/questions/4539909/wpf-datagrid-selected-row-style-->
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="BorderBrush" Value="Blue" />
+                                <Setter Property="BorderThickness" Value="2" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </DockPanel>
+    </DockPanel>
+</Window>

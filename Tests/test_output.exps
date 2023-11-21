@@ -1,0 +1,38 @@
+<Expenses>
+  <Expense ID="1">
+    <Date>1/10/2018 12:00:00 AM</Date>
+    <Description>hat (on credit)</Description>
+    <Amount>12</Amount>
+    <Category>10</Category>
+  </Expense>
+  <Expense ID="2">
+    <Date>1/11/2018 12:00:00 AM</Date>
+    <Description>hat (on credit)</Description>
+    <Amount>-10</Amount>
+    <Category>9</Category>
+  </Expense>
+  <Expense ID="3">
+    <Date>1/10/2019 12:00:00 AM</Date>
+    <Description>scarf (on credit)</Description>
+    <Amount>15</Amount>
+    <Category>10</Category>
+  </Expense>
+  <Expense ID="4">
+    <Date>1/10/2020 12:00:00 AM</Date>
+    <Description>scarf (on credit)</Description>
+    <Amount>-15</Amount>
+    <Category>9</Category>
+  </Expense>
+  <Expense ID="5">
+    <Date>1/11/2020 12:00:00 AM</Date>
+    <Description>McDonalds</Description>
+    <Amount>45</Amount>
+    <Category>14</Category>
+  </Expense>
+  <Expense ID="7">
+    <Date>1/12/2020 12:00:00 AM</Date>
+    <Description>Wendys</Description>
+    <Amount>25</Amount>
+    <Category>14</Category>
+  </Expense>
+</Expenses>

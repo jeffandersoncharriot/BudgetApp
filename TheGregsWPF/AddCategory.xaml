@@ -1,0 +1,57 @@
+﻿<Window x:Class="TheGregsWPF.AddCategory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TheGregsWPF"
+        mc:Ignorable="d"
+        Icon="images/icon.png"
+        Title="Category" Height="250" Width="450" ResizeMode="NoResize"
+        Closing="Window_Closing">
+    <StackPanel>
+        <TextBlock Margin="0 20" FontWeight="Bold" TextAlignment="Center">Add new category</TextBlock>
+        <Grid Margin="10 20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="txbCategory" Margin="5" Padding="5" Grid.Column="0" FontWeight="Medium">
+                <TextBox.Style>
+                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content=" Add category description here..."
+                                                   Foreground="SlateGray" FontSize="12"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+
+            <ComboBox Text="Category Type" x:Name="cmbCategoryTypes" Margin="5" Padding="5" Grid.Column="1">
+                <!--<DataTemplate>
+                    <TextBlock Text="{Binding CategoryType}"></TextBlock>
+                </DataTemplate>-->
+            </ComboBox>
+        </Grid>
+
+        <Grid Margin="10 20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Margin="5" Grid.Column="1" x:Name="btnCancel" Click="btnCancel_Click" >Cancel</Button>
+            <Button Margin="5" Grid.Column="0" x:Name="btnAddCategory" Click="btnAddCategory_Click">Add category</Button>
+        </Grid>
+    </StackPanel>
+</Window>
